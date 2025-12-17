@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CargosModule } from './cargos/cargos.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { ColaboradoresModule } from './colaboradores/colaboradores.module';
+import { UnidadeModule } from './unidades/unidade.module';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { ColaboradoresModule } from './colaboradores/colaboradores.module';
       autoLoadEntities: true,
       synchronize: true, 
     }),
-    CargosModule,
+    CargosModule,UnidadeModule,
     UsuariosModule,
     ColaboradoresModule,
   ],

@@ -3,6 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Unidades } from './Unidades/entities/unidade.entity';
 import { UnidadeModule } from './Unidades/unidade.module';
+import { Colaborador } from './colaborador/entities/colaborador.entity';
+import { ColaboradorModule } from './colaborador/colaborador.module';
+
 
 
 
@@ -21,10 +24,11 @@ import { UnidadeModule } from './Unidades/unidade.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Unidades],
+
+      entities: [Unidades, Colaborador],
       synchronize: true,
     }),
-    UnidadeModule
+    UnidadeModule, ColaboradorModule
   ],
   controllers: [],
   providers: [],

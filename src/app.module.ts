@@ -5,9 +5,8 @@ import { Unidades } from './Unidades/entities/unidade.entity';
 import { UnidadeModule } from './Unidades/unidade.module';
 import { Colaborador } from './colaborador/entities/colaborador.entity';
 import { ColaboradorModule } from './colaborador/colaborador.module';
-
-
-
+import { Cargo } from './cargos/entities/cargos.entity';
+import { CargoModule } from './cargos/cargos.module';
 
 @Module({
   imports: [
@@ -25,10 +24,11 @@ import { ColaboradorModule } from './colaborador/colaborador.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
 
-      entities: [Unidades, Colaborador],
+
+      entities: [Unidades, Colaborador, Cargo],
       synchronize: true,
     }),
-    UnidadeModule, ColaboradorModule
+    UnidadeModule, ColaboradorModule, CargoModule
   ],
   controllers: [],
   providers: [],

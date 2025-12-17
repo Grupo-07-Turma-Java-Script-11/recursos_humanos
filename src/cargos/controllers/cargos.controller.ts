@@ -1,48 +1,45 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
-  Param,
-  Body,
-} from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, HttpCode, HttpStatus, ParseIntPipe } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { CargosService } from '../services/cargos.service';
+import { CargoService } from '../services/cargos.service'; // Verifique se o nome da pasta é services ou service
 import { Cargo } from '../entities/cargos.entity';
 
 @ApiTags('Cargos')
 @Controller('cargos')
 export class CargosController {
-  constructor(private readonly cargosService: CargosService) {}
+  constructor(private readonly cargosService: CargoService) {}
 
   @ApiOperation({ summary: 'Criar cargo' })
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   criar(@Body() cargo: Cargo) {
-    return this.cargosService.criar(cargo);
+    return this.cargosService.create(cargo);
   }
 
   @ApiOperation({ summary: 'Listar todos os cargos' })
   @Get()
+  @HttpCode(HttpStatus.OK)
   listarTodos() {
-    return this.cargosService.listarTodos();
+    return this.cargosService.findAll();
   }
 
   @ApiOperation({ summary: 'Buscar cargo por ID' })
   @Get(':id')
-  buscarPorId(@Param('id') id: number) {
-    return this.cargosService.buscarPorId(+id);
+  @HttpCode(HttpStatus.OK)
+  buscarPorId(@Param('id', ParseIntPipe) id: number) {
+    return this.cargosService.findById(id);
   }
 
   @ApiOperation({ summary: 'Alterar cargo' })
-  @Put(':id')
-  alterar(@Param('id') id: number, @Body() cargo: Cargo) {
-    return this.cargosService.alterar(+id, cargo);
+  @Put() // No seu service o update espera o objeto completo com ID, então tiramos o :id da URL ou atribuímos no corpo
+  @HttpCode(HttpStatus.OK)
+  alterar(@Body() cargo: Cargo) {
+    return this.cargosService.update(cargo);
   }
 
   @ApiOperation({ summary: 'Deletar cargo' })
   @Delete(':id')
-  deletar(@Param('id') id: number) {
-    return this.cargosService.deletar(+id);
+  @HttpCode(HttpStatus.NO_CONTENT)
+  deletar(@Param('id', ParseIntPipe) id: number) {
+    return this.cargosService.delete(id);
   }
 }

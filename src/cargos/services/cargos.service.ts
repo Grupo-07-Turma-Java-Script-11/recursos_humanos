@@ -1,61 +1,58 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Cargo } from '../entities/cargos.entity';
-//import { Usuario } from '../../usuarios/entities/usuario.entity';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { DeleteResult, ILike, Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Cargo } from "../entities/cargos.entity";
 
 @Injectable()
-export class CargosService {
-  constructor(
-    @InjectRepository(Cargo)
-    private cargosRepository: Repository<Cargo>,
-    
-    *@InjectRepository(Usuario)
-    private usuariosRepository: Repository<Usuario>,
-  ) {}
+export class CargoService {
 
-  async criar(cargo: Cargo): Promise<Cargo> {
-    const empresa = await this.usuariosRepository.findOne({
-      where: { id: cargo.empresa?.id },
-    });
+    constructor(
+        @InjectRepository(Cargo) 
+        private cargoRepository: Repository<Cargo>               
+    ) { }
 
-    if (!empresa) {
-      throw new NotFoundException('Empresa não encontrada');
+    async findAll(): Promise<Cargo[]> {
+        return await this.cargoRepository.find();
     }
 
-    cargo.empresa = empresa;
-    return this.cargosRepository.save(cargo);
-  }
+    async findById(id: number): Promise<Cargo> {
+        const cargo = await this.cargoRepository.findOne({
+            where: { id }
+        });
 
-  listarTodos(): Promise<Cargo[]> {
-    return this.cargosRepository.find({
-      relations: ['empresa', 'colaboradores'],
-    });
-  }
+        if (!cargo) {
+            throw new HttpException('Cargo não encontrado', HttpStatus.NOT_FOUND);
+        }
 
-  async buscarPorId(id: number): Promise<Cargo> {
-    const cargo = await this.cargosRepository.findOne({
-      where: { id_cargos: id },
-      relations: ['empresa', 'colaboradores'],
-    });
-
-    if (!cargo) {
-      throw new NotFoundException('Cargo não encontrado');
+        return cargo;
     }
 
-    return cargo;
-  }
+    async findByNome(nome: string): Promise<Cargo[]> {
+        return await this.cargoRepository.find({
+            where: {
+                nome: ILike(`%${nome}%`)
+            }
+        });
+    }
 
-  async alterar(id: number, cargo: Cargo): Promise<Cargo> {
-    const cargoExistente = await this.buscarPorId(id);
+    async create(cargo: Cargo): Promise<Cargo> {
+        // Removi a busca por usuário que estava aqui, pois não existe nessa entidade
+        return await this.cargoRepository.save(cargo);
+    }
 
-    Object.assign(cargoExistente, cargo);
+    async update(cargo: Cargo): Promise<Cargo> {
+        // Verifica se o ID foi enviado e se existe no banco
+        if (!cargo.id) {
+            throw new HttpException('ID do cargo é obrigatório!', HttpStatus.BAD_REQUEST);
+        }
 
-    return this.cargosRepository.save(cargoExistente);
-  }
+        await this.findById(cargo.id);
 
-  async deletar(id: number): Promise<void> {
-    const cargo = await this.buscarPorId(id);
-    await this.cargosRepository.remove(cargo);
-  }
+        return await this.cargoRepository.save(cargo);
+    }
+
+    async delete(id: number): Promise<DeleteResult> {
+        await this.findById(id);
+        return await this.cargoRepository.delete(id);
+    }
 }

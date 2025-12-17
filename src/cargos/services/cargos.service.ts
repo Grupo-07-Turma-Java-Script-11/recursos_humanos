@@ -2,41 +2,41 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cargo } from '../entities/cargos.entity';
-//import { Usuario } from '../../usuarios/entities/usuario.entity';
+import { Unidade } from '../../unidades/entities/unidade.entity';
 
 @Injectable()
 export class CargosService {
   constructor(
     @InjectRepository(Cargo)
-    private cargosRepository: Repository<Cargo>,
-    
-    *@InjectRepository(Usuario)
-    private usuariosRepository: Repository<Usuario>,
-  ) {}
+    private readonly cargosRepository: Repository<Cargo>,
+
+    @InjectRepository(Unidade)
+    private readonly unidadeRepository: Repository<Unidade>,
+  ) { }
 
   async criar(cargo: Cargo): Promise<Cargo> {
-    const empresa = await this.usuariosRepository.findOne({
-      where: { id: cargo.empresa?.id },
+    const unidade = await this.unidadeRepository.findOne({
+      where: { id_unidade: cargo.unidade?.id_unidade },
     });
 
-    if (!empresa) {
-      throw new NotFoundException('Empresa não encontrada');
+    if (!unidade) {
+      throw new NotFoundException('Unidade não encontrada');
     }
 
-    cargo.empresa = empresa;
+    cargo.unidade = unidade;
     return this.cargosRepository.save(cargo);
   }
 
   listarTodos(): Promise<Cargo[]> {
     return this.cargosRepository.find({
-      relations: ['empresa', 'colaboradores'],
+      relations: ['unidade', 'colaboradores'],
     });
   }
 
   async buscarPorId(id: number): Promise<Cargo> {
     const cargo = await this.cargosRepository.findOne({
       where: { id_cargos: id },
-      relations: ['empresa', 'colaboradores'],
+      relations: ['unidade', 'colaboradores'],
     });
 
     if (!cargo) {
@@ -49,8 +49,19 @@ export class CargosService {
   async alterar(id: number, cargo: Cargo): Promise<Cargo> {
     const cargoExistente = await this.buscarPorId(id);
 
-    Object.assign(cargoExistente, cargo);
+    if (cargo.unidade?.id_unidade) {
+      const unidade = await this.unidadeRepository.findOne({
+        where: { id_unidade: cargo.unidade.id_unidade },
+      });
 
+      if (!unidade) {
+        throw new NotFoundException('Unidade não encontrada');
+      }
+
+      cargoExistente.unidade = unidade;
+    }
+
+    Object.assign(cargoExistente, cargo);
     return this.cargosRepository.save(cargoExistente);
   }
 

@@ -6,7 +6,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { Usuario } from '../../usuarios/entities/usuarios.entity';
+import { Unidade } from '../../unidades/entities/unidade.entity';
 import { Colaborador } from '../../colaboradores/entities/colaboradores.entity';
 
 @Entity({ name: 'tb_cargos' })
@@ -37,20 +37,20 @@ export class Cargo {
   hierarquia: string;
 
   @ApiProperty({
-    type: () => Usuario,
-    description: 'Empresa responsável pelo cargo',
+    type: () => Unidade,
+    description: 'Unidade responsável pelo cargo',
   })
-  @ManyToOne(() => Usuario, (usuario) => usuarios.cargos, {
+  @ManyToOne(() => Unidade, (unidade) => unidade.cargos, {
     onDelete: 'CASCADE',
     nullable: false,
   })
-  empresa: Usuario;
+  unidade: Unidade;
 
   @ApiProperty({
     type: () => Colaborador,
     isArray: true,
     description: 'Colaboradores associados ao cargo',
   })
-  @OneToMany(() => Colaborador, (colaborador) => colaboradores.cargo)
+  @OneToMany(() => Colaborador, (colaborador) => colaborador.cargo)
   colaboradores: Colaborador[];
 }

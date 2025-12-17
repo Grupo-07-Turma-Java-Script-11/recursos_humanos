@@ -1,29 +1,24 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-
+import { CargosModule } from './cargos/cargos.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
+import { ColaboradoresModule } from './colaboradores/colaboradores.module';
 
 @Module({
   imports: [
-    // Deixa disponivel em todo o projeto as variaveis de hambiente.
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-
-    // configurar acesso ao banco de dados
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST,
-      port: +(process.env.DB_PORT ?? 3310),//alterar as configurações 
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      entities: [],
-      synchronize: true,
-    })
+      type: 'mysql', 
+      host: 'localhost',
+      port: 3310,
+      username: 'root',
+      password: 'root',
+      database: 'db_rh',
+      autoLoadEntities: true,
+      synchronize: true, 
+    }),
+    CargosModule,
+    UsuariosModule,
+    ColaboradoresModule,
   ],
-  controllers: [],
-  providers: [],
 })
-export class AppModule { }
+export class AppModule {}

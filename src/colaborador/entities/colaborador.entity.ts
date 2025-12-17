@@ -6,7 +6,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity({ name: 'tb_colaboradores' })
 export class Colaborador {
 
-@PrimaryGeneratedColumn({ type: 'bigint' })
+@PrimaryGeneratedColumn()
   id: number;
 
   @IsNotEmpty()

@@ -40,7 +40,7 @@ export class Cargo {
     type: () => Unidade,
     description: 'Unidade responsável pelo cargo',
   })
-  @ManyToOne(() => Unidade, (unidade) => unidade.cargos, {
+  @ManyToOne(() => Unidade, {
     onDelete: 'CASCADE',
     nullable: false,
   })

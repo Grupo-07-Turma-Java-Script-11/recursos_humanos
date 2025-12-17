@@ -6,13 +6,13 @@ import {
   OneToMany,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { Usuario } from '../../usuarios/entities/usuarios.entity';
+import { Unidade } from '../../unidades/entities/unidade.entity';
 import { Colaborador } from '../../colaboradores/entities/colaboradores.entity';
 
 @Entity({ name: 'tb_cargos' })
 export class Cargo {
   @ApiProperty({ example: 1, description: 'ID do cargo' })
-  @PrimaryGeneratedColumn({ name: 'id_cargos' })
+  @PrimaryGeneratedColumn({ name: 'id_cargos', type: 'int' })
   id_cargos: number;
 
   @ApiProperty({
@@ -37,20 +37,19 @@ export class Cargo {
   hierarquia: string;
 
   @ApiProperty({
-    type: () => Usuario,
-    description: 'Empresa responsável pelo cargo',
+    description: 'Unidade à qual o cargo pertence',
   })
-  @ManyToOne(() => Usuario, (usuario) => usuarios.cargos, {
-    onDelete: 'CASCADE',
+  @ManyToOne(() => Unidade, {
     nullable: false,
+    onDelete: 'RESTRICT',
   })
-  empresa: Usuario;
+  unidade: Unidade;
 
   @ApiProperty({
     type: () => Colaborador,
     isArray: true,
     description: 'Colaboradores associados ao cargo',
   })
-  @OneToMany(() => Colaborador, (colaborador) => colaboradores.cargo)
+  @OneToMany(() => Colaborador, (colaborador) => colaborador.cargo)
   colaboradores: Colaborador[];
 }

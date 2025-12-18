@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { Cargo } from "../../cargos/entities/cargos.entity";
 import { Colaborador } from "../../colaborador/entities/colaborador.entity";
-import { Unidades } from "../../Unidades/entities/unidade.entity";
+import { Unidades } from "../../unidades/entities/unidade.entity";
 
 
 @Injectable()

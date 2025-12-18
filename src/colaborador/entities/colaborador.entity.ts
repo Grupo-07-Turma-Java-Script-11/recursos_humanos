@@ -2,7 +2,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsDecimal, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Unidades } from '../../Unidades/entities/unidade.entity';
+import { Unidades } from '../../unidades/entities/unidade.entity';
 import { Cargo } from '../../cargos/entities/cargos.entity';
 
 
@@ -27,7 +27,7 @@ export class Colaborador {
 
   @ApiProperty()
   @IsNotEmpty()
-  @Column({ type: 'datetime' })
+  @Column({ type: 'date' })
   data_admissao: Date;
 
   @ApiProperty()

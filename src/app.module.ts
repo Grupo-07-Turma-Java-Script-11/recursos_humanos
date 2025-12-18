@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UnidadeModule } from './Unidades/unidade.module';
+import { UnidadeModule } from './unidades/unidade.module';
 import { ColaboradorModule } from './colaborador/colaborador.module';
 import { CargoModule } from './cargos/cargos.module';
 import { AuthModule } from './auth/auth.module';

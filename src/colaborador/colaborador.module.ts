@@ -5,7 +5,7 @@ import { Colaborador } from "./entities/colaborador.entity";
 import { ColaboradorService } from "./service/colaborador.service";
 import { ColaboradorController } from "./controller/colaborador.controller";
 import { CargoModule } from "../cargos/cargos.module";
-import { UnidadeModule } from "../Unidades/unidade.module";
+import { UnidadeModule } from "../unidades/unidade.module";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Colaborador]), CargoModule, UnidadeModule],

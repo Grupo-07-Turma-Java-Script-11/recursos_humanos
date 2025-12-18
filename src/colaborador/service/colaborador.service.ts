@@ -4,7 +4,7 @@ import { Colaborador } from './../entities/colaborador.entity';
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Like, Repository } from 'typeorm';
 import { CargoService } from '../../cargos/services/cargos.service';
-import { UnidadeService } from '../../Unidades/services/unidade.service';
+import { UnidadeService } from '../../unidades/services/unidade.service';
 
 @Injectable()
 export class ColaboradorService {

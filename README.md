@@ -1,98 +1,143 @@
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="https://brazil.generation.org/">
+    <img src="https://brazil.generation.org/wp-content/uploads/2025/07/Generation_BRASIL_logo_NEW-BLUE.png" width="120" alt="Generation logo" />
+  </a>
 </p>
+<img width="180" height="180" alt="logoPeople-Flow" src="https://github.com/user-attachments/assets/405b065c-92cc-4360-aebb-cbc463d8f4b8" />
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# 🧑‍💼 PeopleFlow — Sistema de Recursos Humanos
 
-## Project setup
+> **Gestão inteligente de pessoas**
+
+Projeto desenvolvido pelo **Grupo 7 — Turma 11 JavaScript (@Generationbr)** com foco em organização, colaboração em equipe e aplicação prática de conceitos de desenvolvimento de software.
+
+---
+
+## 📌 Visão Geral do Projeto
+
+O **PeopleFlow** é um **Sistema de Recursos Humanos (RH)** criado para apoiar a gestão de pessoas de forma clara, eficiente e escalável. O projeto simula um cenário real de RH, permitindo o controle e a visualização de informações essenciais relacionadas aos colaboradores.
+
+Este repositório concentra o código-fonte, documentação e organização do projeto, seguindo boas práticas de versionamento e trabalho em equipe.
+
+---
+
+## 🎯 Objetivos
+
+* Aplicar na prática os conhecimentos em **JavaScript**
+* Trabalhar com **metodologias ágeis (Scrum)**
+* Desenvolver um sistema organizado e funcional
+* Estimular colaboração, versionamento e documentação
+* Simular um projeto real de tecnologia voltado a RH
+
+---
+
+## ⚙️ Funcionalidades (Demonstração Prática)
+
+Durante a apresentação do projeto, foi realizada uma **demonstração ao vivo** das funcionalidades implementadas, destacando:
+
+* Estruturação do sistema de RH
+* Organização das informações
+* Fluxo funcional do sistema
+* Clareza na navegação e uso
+
+> As funcionalidades apresentadas refletem os desafios reais encontrados em projetos de gestão de pessoas.
+
+---
+
+---
+
+## 📈 Impactos do Projeto
+
+* Fortalecimento do trabalho colaborativo
+* Evolução técnica dos integrantes
+* Experiência prática em projeto real
+* Aplicação de conceitos de gestão, desenvolvimento , testes e deploy.
+
+---
+
+## 👥 Equipe do Projeto
+
+### 🧠 Product Owner (PO)
+
+* **Kevin Costa**
+
+### 🔄 Scrum Master (SM)
+
+* **Bruna Gonçalves**
+
+### 💻 Desenvolvedores (DEVs)
+
+* **Juliana Rodrigues**
+* **Nayane Rodrigues**
+* **Lucas Mafra**
+
+### 🧪 Tester
+
+* **Daniel Andrade**
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+* **JavaScript**
+* **Git & GitHub**
+* **Metodologia Kanban com Trello**
+
+[![Tecnologias e Ferramentas utilizadas:](https://skillicons.dev/icons?i=ts,nodejs,npm,nestjs,jest,postgres,mysql,vscode,githubactions,github,git)](https://skillicons.dev)  
+
+*(Outras tecnologias podem ser adicionadas conforme evolução do projeto.)*
+
+---
+
+## 🚀 Como Executar o Projeto
 
 ```bash
-$ npm install
+# 1. Clone o repositório
+git clone https://github.com/Grupo-07-Turma-Java-Script-11/recursos_humanos
+
+# 2. Acesse a pasta do projeto
+cd recursos_humanos
+
+# 3. Instale as dependências (se aplicável)
+npm install
+
+# 4. Execute o projeto
+npm run start:dev
 ```
 
-## Compile and run the project
+---
+## Ferramentas Utilizadas
 
-```bash
-# development
-$ npm run start
+[![Tecnologias e Ferramentas utilizadas:](https://skillicons.dev/icons?i=ts,nodejs,npm,nestjs,mysql,vscode,github,git)](https://skillicons.dev)
 
-# watch mode
-$ npm run start:dev
+## 🔗 Links Importantes
 
-# production mode
-$ npm run start:prod
-```
+* 🌐 **Linktree do Grupo:** [https://linktr.ee/grupo7_js11](https://linktr.ee/grupo7_js11)
+* 📦 **Repositório GitHub:** [https://github.com/Grupo-07-Turma-Java-Script-11/recursos_humanos](https://github.com/Grupo-07-Turma-Java-Script-11/recursos_humanos)
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+## 🙌 Agradecimentos
 
-# e2e tests
-$ npm run test:e2e
+Agradecemos a todos que acompanharam, apoiaram e contribuíram para o desenvolvimento deste projeto.
+[Bruna Luiza](https://github.com/brunaluiza18)
+[Daniel Almeida](https://github.com/Dan2a)
+[Juliana Matos](https://github.com/julirmatos)
+[Keven Costa](https://github.com/Keven-Costa)
+[Lucas Mafra](https://github.com/LucasOMafra)
+[Nayane Oi](https://github.com/nayaneoi)
 
-# test coverage
-$ npm run test:cov
-```
 
-## Deployment
+**Grupo 7 — Turma 11 JavaScript** 🚀
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Mentor
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+[Yuri Oliveira](https://github.com/Yuri-stack)
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+---
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+⭐ Se este projeto te ajudou ou te inspirou, considere deixar uma estrela no repositório!

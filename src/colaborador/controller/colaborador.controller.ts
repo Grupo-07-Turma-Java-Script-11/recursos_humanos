@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPip
 import { ColaboradorService } from "../service/colaborador.service";
 import { Colaborador } from "../entities/colaborador.entity";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Colaboradores')
 @UseGuards(JwtAuthGuard)
@@ -14,6 +14,7 @@ export class ColaboradorController {
 
     @Get()
     @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Listar todos os colaboradores' })
     findAll(): Promise<Colaborador[]> {
         // Retorna todos os registros ordenados por nome
         return this.colaboradorService.findAll();
@@ -21,6 +22,7 @@ export class ColaboradorController {
 
     @Get('/:id')
     @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Listar os colaboradores pelo ID' })
     findById(@Param('id', ParseIntPipe) id: number): Promise<Colaborador> {
         // Busca um colaborador específico pelo ID (numérico)
         return this.colaboradorService.findById(id);
@@ -28,6 +30,7 @@ export class ColaboradorController {
 
     @Get('/nome/:nome')
     @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Listar os colaboradores pelo nome' })
     findByNome(@Param('nome') nome: string): Promise<Colaborador[]> {
         // Busca colaboradores que contenham o texto no nome
         return this.colaboradorService.findByNome(nome);
@@ -35,6 +38,7 @@ export class ColaboradorController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
+    @ApiOperation({ summary: 'Criar colaborador' })
     create(@Body() colaborador: Colaborador): Promise<Colaborador> {
         // Cria um novo colaborador no banco de dados
         return this.colaboradorService.create(colaborador);
@@ -42,6 +46,7 @@ export class ColaboradorController {
 
     @Put()
     @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Atualizar colaborador' })
     update(@Body() colaborador: Colaborador): Promise<Colaborador> {
         // Atualiza os dados de um colaborador existente
         return this.colaboradorService.update(colaborador);
@@ -49,6 +54,7 @@ export class ColaboradorController {
 
     @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
+    @ApiOperation({ summary: 'Deletar colaborador' })
     delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
         // Remove um colaborador permanentemente pelo ID
         return this.colaboradorService.delete(id);
@@ -56,6 +62,7 @@ export class ColaboradorController {
 
     @Post('/:id/contracheque')
     @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Calcular salário' })
     async getSalario(
 
         @Param('id', ParseIntPipe) id: number,

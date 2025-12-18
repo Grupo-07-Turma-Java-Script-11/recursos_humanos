@@ -1,8 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-
+import { Unidades } from './Unidades/entities/unidade.entity';
+import { UnidadeModule } from './Unidades/unidade.module';
+import { Colaborador } from './colaborador/entities/colaborador.entity';
+import { ColaboradorModule } from './colaborador/colaborador.module';
+import { Cargo } from './cargos/entities/cargos.entity';
+import { CargoModule } from './cargos/cargos.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,9 +24,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [],
+
+
+      entities: [Unidades, Colaborador, Cargo],
       synchronize: true,
-    })
+    }),
+    UnidadeModule, ColaboradorModule, CargoModule, AuthModule
   ],
   controllers: [],
   providers: [],

@@ -1,7 +1,9 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import { Unidades } from "../entities/unidade.entity";
 import { UnidadeService } from "../services/unidade.service";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Unidades')
 @Controller("/unidades")
 export class UnidadeController {
 

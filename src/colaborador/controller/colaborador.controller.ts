@@ -3,7 +3,9 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPip
 import { ColaboradorService } from "../service/colaborador.service";
 import { Colaborador } from "../entities/colaborador.entity";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Colaboradores')
 @UseGuards( JwtAuthGuard )   
 @Controller("/colaboradores")
 export class ColaboradorController {

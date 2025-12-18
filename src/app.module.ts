@@ -6,6 +6,7 @@ import { ColaboradorModule } from './colaborador/colaborador.module';
 import { CargoModule } from './cargos/cargos.module';
 import { AuthModule } from './auth/auth.module';
 import { ProdService } from './data/services/prod.service';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { ProdService } from './data/services/prod.service';
     }),
     UnidadeModule, ColaboradorModule, CargoModule, AuthModule
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule { }

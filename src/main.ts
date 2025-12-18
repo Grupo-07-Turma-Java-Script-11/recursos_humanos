@@ -28,7 +28,7 @@ async function bootstrap() {
   app.enableCors();
 
   // Indico qual porta o projeto está sendo executado
-  await app.listen(4000);
+  await app.listen(process.env.PORT ?? 4000);
 }
 
 bootstrap();

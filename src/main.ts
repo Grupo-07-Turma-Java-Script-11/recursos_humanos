@@ -10,7 +10,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Recursos Humanos')
     .setDescription('Projeto Integrador')
-    .setContact("Generation Brasil", "http://www.generationbrasil.online", "generation@email.com")
+    .setContact("Grupo 07", "https://github.com/Grupo-07-Turma-Java-Script-11/recursos_humanos", "grupo7javascript11@gmail.com")
     .setVersion('1.0')
     .addBearerAuth()
     .build();

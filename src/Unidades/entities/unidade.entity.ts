@@ -1,32 +1,36 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, isEmail, IsNotEmpty } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Colaborador } from "../../colaborador/entities/colaborador.entity";
 
-@Entity({name: 'tb_unidades'})
+@Entity({ name: 'tb_unidades' })
 export class Unidades {
 
     @PrimaryGeneratedColumn()
+    @ApiProperty()
     id: number;
 
-        
     @ApiProperty()
     @IsNotEmpty()
-    @Column({length: 255, nullable: false})
+    @Column({ length: 255, nullable: false })
     nome: string
 
     @ApiProperty()
     @IsEmail()
-    @IsNotEmpty() 
-    @Column({length: 255, nullable: false})
+    @IsNotEmpty()
+    @Column({ length: 255, nullable: false })
     usuario: string
 
     @ApiProperty()
-    @IsNotEmpty() 
-    @Column({length: 255, nullable: false})
+    @IsNotEmpty()
+    @Column({ length: 255, nullable: false })
     senha: string
 
     @ApiProperty()
     @Column({ length: 5000 })
     foto: string
 
+    @ApiProperty()
+    @OneToMany(() => Colaborador, (colaborador) => colaborador.unidade)
+    colaborador: Colaborador[]
 }

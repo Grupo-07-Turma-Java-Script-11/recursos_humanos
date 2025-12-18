@@ -7,8 +7,8 @@ import { Cargo } from "../entities/cargos.entity";
 export class CargoService {
 
     constructor(
-        @InjectRepository(Cargo) 
-        private cargoRepository: Repository<Cargo>               
+        @InjectRepository(Cargo)
+        private cargoRepository: Repository<Cargo>
     ) { }
 
     async findAll(): Promise<Cargo[]> {
@@ -41,10 +41,6 @@ export class CargoService {
     }
 
     async update(cargo: Cargo): Promise<Cargo> {
-        // Verifica se o ID foi enviado e se existe no banco
-        if (!cargo.id) {
-            throw new HttpException('ID do cargo é obrigatório!', HttpStatus.BAD_REQUEST);
-        }
 
         await this.findById(cargo.id);
 

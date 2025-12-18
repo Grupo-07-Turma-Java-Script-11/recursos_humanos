@@ -1,19 +1,22 @@
 /* eslint-disable prettier/prettier */
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsDecimal, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Unidades } from '../../Unidades/entities/unidade.entity';
+import { Cargo } from '../../cargos/entities/cargos.entity';
 
 
 @Entity({ name: 'tb_colaboradores' })
 export class Colaborador {
 
-@PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @Column() 
+  @Column()
   nome: string;
 
   @ApiProperty()
@@ -24,7 +27,7 @@ export class Colaborador {
 
   @ApiProperty()
   @IsNotEmpty()
-  @Column({ type: 'datetime' }) 
+  @Column({ type: 'datetime' })
   data_admissao: Date;
 
   @ApiProperty()
@@ -36,8 +39,16 @@ export class Colaborador {
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0, nullable: true })
   acrescimo: number;
 
-  //Criar relação com:
-  // tb_usuarios id_cliente e,
-  // tb_cargos_id_cargo
+  @ApiProperty({ type: () => Unidades })
+  @ManyToOne(() => Unidades, (unidade) => unidade.colaborador, {
+    onDelete: "CASCADE"
+  })
+  unidade: Unidades
+
+  @ApiProperty({ type: () => Cargo })
+  @ManyToOne(() => Cargo, (cargo) => cargo.colaborador, {
+    onDelete: "CASCADE"
+  })
+  cargo: Cargo
 
 }

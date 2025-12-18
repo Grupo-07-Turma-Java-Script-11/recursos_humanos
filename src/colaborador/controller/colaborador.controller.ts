@@ -3,13 +3,14 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPip
 import { ColaboradorService } from "../service/colaborador.service";
 import { Colaborador } from "../entities/colaborador.entity";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Colaboradores')
-@UseGuards( JwtAuthGuard )   
+// @UseGuards(JwtAuthGuard)
 @Controller("/colaboradores")
+@ApiBearerAuth()
 export class ColaboradorController {
-    constructor(private readonly colaboradorService: ColaboradorService) {}
+    constructor(private readonly colaboradorService: ColaboradorService) { }
 
     @Get()
     @HttpCode(HttpStatus.OK)
@@ -39,14 +40,11 @@ export class ColaboradorController {
         return this.colaboradorService.create(colaborador);
     }
 
-    @Put('/:id')
+    @Put()
     @HttpCode(HttpStatus.OK)
-    update(
-        @Param('id', ParseIntPipe) id: number,
-        @Body() colaborador: Colaborador
-    ): Promise<Colaborador> {
+    update(@Body() colaborador: Colaborador): Promise<Colaborador> {
         // Atualiza os dados de um colaborador existente
-        return this.colaboradorService.update(id, colaborador); 
+        return this.colaboradorService.update(colaborador);
     }
 
     @Delete('/:id')
@@ -60,8 +58,8 @@ export class ColaboradorController {
     @HttpCode(HttpStatus.OK)
     async getSalario(
 
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dadosHolerite: any // Recebe o objeto completo do JSON
+        @Param('id', ParseIntPipe) id: number,
+        @Body() dadosHolerite: any // Recebe o objeto completo do JSON
     ) {
         // Executa a regra de cálculo automático de salário na Service
         return this.colaboradorService.calcularSalarioLiquido(id, dadosHolerite);

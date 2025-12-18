@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-
+import { UnidadeModule } from './Unidades/unidade.module';
+import { ColaboradorModule } from './colaborador/colaborador.module';
+import { CargoModule } from './cargos/cargos.module';
+import { AuthModule } from './auth/auth.module';
+import { ProdService } from './data/services/prod.service';
 
 @Module({
   imports: [
@@ -12,16 +15,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
 
     // configurar acesso ao banco de dados
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST,
-      port: +(process.env.DB_PORT ?? 3310),//alterar as configurações 
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      entities: [],
-      synchronize: true,
-    })
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      useClass: ProdService,
+      imports: [ConfigModule],
+    }),
+    UnidadeModule, ColaboradorModule, CargoModule, AuthModule
   ],
   controllers: [],
   providers: [],

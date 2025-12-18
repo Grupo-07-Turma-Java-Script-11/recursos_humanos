@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query, UseGuards } from "@nestjs/common";
 import { ColaboradorService } from "../service/colaborador.service";
 import { Colaborador } from "../entities/colaborador.entity";
+import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 
+@UseGuards( JwtAuthGuard )   
 @Controller("/colaboradores")
 export class ColaboradorController {
     constructor(private readonly colaboradorService: ColaboradorService) {}

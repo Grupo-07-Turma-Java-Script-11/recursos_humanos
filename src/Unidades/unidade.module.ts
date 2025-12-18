@@ -3,10 +3,11 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { Unidades } from "./entities/unidade.entity";
 import { UnidadeService } from "./services/unidade.service";
 import { UnidadeController } from "./controllers/unidade.controller";
+import { Bcrypt } from "../auth/bcrypt/bcrypt";
 
 @Module({
     imports: [TypeOrmModule.forFeature([Unidades])],
-    providers: [UnidadeService],
+    providers: [UnidadeService, Bcrypt],
     controllers: [UnidadeController],
     exports: [UnidadeService],
 })

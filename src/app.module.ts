@@ -7,6 +7,7 @@ import { Colaborador } from './colaborador/entities/colaborador.entity';
 import { ColaboradorModule } from './colaborador/colaborador.module';
 import { Cargo } from './cargos/entities/cargos.entity';
 import { CargoModule } from './cargos/cargos.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { CargoModule } from './cargos/cargos.module';
       entities: [Unidades, Colaborador, Cargo],
       synchronize: true,
     }),
-    UnidadeModule, ColaboradorModule, CargoModule
+    UnidadeModule, ColaboradorModule, CargoModule, AuthModule
   ],
   controllers: [],
   providers: [],

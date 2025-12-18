@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, HttpCode, HttpStatus, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, HttpCode, HttpStatus, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CargoService } from '../services/cargos.service'; // Verifique se o nome da pasta é services ou service
 import { Cargo } from '../entities/cargos.entity';
+import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 
+@UseGuards( JwtAuthGuard )   
 @ApiTags('Cargos')
 @Controller('cargos')
 export class CargosController {

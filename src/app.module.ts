@@ -1,11 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Unidades } from './Unidades/entities/unidade.entity';
 import { UnidadeModule } from './Unidades/unidade.module';
-import { Colaborador } from './colaborador/entities/colaborador.entity';
 import { ColaboradorModule } from './colaborador/colaborador.module';
-import { Cargo } from './cargos/entities/cargos.entity';
 import { CargoModule } from './cargos/cargos.module';
 import { AuthModule } from './auth/auth.module';
 import { ProdService } from './data/services/prod.service';

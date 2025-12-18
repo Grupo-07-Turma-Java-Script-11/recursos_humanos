@@ -34,17 +34,17 @@ describe('Testes dos Módulos Usuário e Auth (e2e)', () => {
     })
 
     it("01 - Deve Cadastrar um novo Usuário", async () => {
-        const resposta = await request(app.getHttpServer()) 
-            .post('/unidades/cadastrar')    
-            .send({                         
+        const resposta = await request(app.getHttpServer())
+            .post('/unidades/cadastrar')
+            .send({
                 nome: 'Root',
                 usuario: 'root@root.com',
                 senha: 'rootroot',
                 foto: '-',
             })
-            .expect(201)                    
+            .expect(201)
 
-        usuarioId = resposta.body.id;      
+        usuarioId = resposta.body.id;
 
     });
 
@@ -62,20 +62,20 @@ describe('Testes dos Módulos Usuário e Auth (e2e)', () => {
 
     it("03 - Deve Autenticar o Usuário (Login)", async () => {
         const resposta = await request(app.getHttpServer())
-            .post("/usuarios/logar")
+            .post("/login/logar")
             .send({
                 usuario: 'root@root.com',
                 senha: 'rootroot',
             })
             .expect(200)
 
-        token = resposta.body.token;   
+        token = resposta.body.token;
     })
 
     it("04 - Deve Listar todos os Usuários", async () => {
         return request(app.getHttpServer())
-            .get('/unidades/all')
-            .set('Authorization', `${token}`)  
+            .get('/unidades')
+            .set('Authorization', `${token}`)
             .send({})
             .expect(200)
     })
@@ -92,8 +92,8 @@ describe('Testes dos Módulos Usuário e Auth (e2e)', () => {
                 foto: '-',
             })
             .expect(200)
-            .then(resposta => { 
-                expect("Root Atualizado").toEqual(resposta.body.nome)   
+            .then(resposta => {
+                expect("Root Atualizado").toEqual(resposta.body.nome)
             })
 
     })

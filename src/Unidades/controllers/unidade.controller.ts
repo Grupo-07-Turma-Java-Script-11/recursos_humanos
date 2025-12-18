@@ -12,21 +12,21 @@ export class UnidadeController {
 
     constructor(private readonly unidadeService: UnidadeService) { }
 
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get()
     @HttpCode(HttpStatus.OK)
     findAll(): Promise<Unidades[]> {
         return this.unidadeService.findAll();
     }
 
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get('/:id')
     @HttpCode(HttpStatus.OK)
     findById(@Param('id', ParseIntPipe) id: number): Promise<Unidades> {
         return this.unidadeService.findById(id)
     }
 
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get('nome/:nome')
     @HttpCode(HttpStatus.OK)
     findByName(@Param('nome') nome: string): Promise<Unidades[]> {
@@ -39,14 +39,14 @@ export class UnidadeController {
         return this.unidadeService.create(usuario)
     }
 
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Put('/atualizar')
     @HttpCode(HttpStatus.OK)
     async update(@Body() usuario: Unidades): Promise<Unidades> {
         return this.unidadeService.update(usuario)
     }
 
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Delete('/:id')
     @HttpCode(HttpStatus.OK)
     async delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {

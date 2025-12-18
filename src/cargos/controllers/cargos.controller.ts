@@ -5,7 +5,7 @@ import { Cargo } from '../entities/cargos.entity';
 import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 import { DeleteResult } from 'typeorm';
 
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @ApiTags('Cargos')
 @Controller('cargos')
 @ApiBearerAuth()

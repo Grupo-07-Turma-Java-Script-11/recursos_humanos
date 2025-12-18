@@ -6,7 +6,7 @@ import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Colaboradores')
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller("/colaboradores")
 @ApiBearerAuth()
 export class ColaboradorController {

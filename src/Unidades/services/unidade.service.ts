@@ -14,7 +14,11 @@ export class UnidadeService {
     ) { }
 
     async findAll(): Promise<Unidades[]> {
-        return await this.unidadeRepository.find();
+        return await this.unidadeRepository.find({
+            relations: {
+                colaborador: true
+            }
+        });
     }
 
     async findById(id: number): Promise<Unidades> {
@@ -32,6 +36,9 @@ export class UnidadeService {
         return await this.unidadeRepository.findOne({
             where: {
                 usuario: usuario
+            },
+            relations: {
+                colaborador: true
             }
         })
     }
@@ -40,6 +47,9 @@ export class UnidadeService {
         return this.unidadeRepository.find({
             where: {
                 nome: ILike(`%${nome}%`)
+            },
+            relations: {
+                colaborador: true
             }
         })
     }

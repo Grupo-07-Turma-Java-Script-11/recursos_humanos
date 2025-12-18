@@ -8,6 +8,6 @@ import { CargosController } from './controllers/cargos.controller';
   imports: [TypeOrmModule.forFeature([Cargo])],
   providers: [CargoService],
   controllers: [CargosController],
-  exports: [TypeOrmModule]
+  exports: [TypeOrmModule, CargoService]
 })
 export class CargoModule { }

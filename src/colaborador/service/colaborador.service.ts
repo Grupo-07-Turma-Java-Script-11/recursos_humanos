@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Colaborador } from './../entities/colaborador.entity';
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Like, Repository } from 'typeorm';
+import { CargoService } from '../../cargos/services/cargos.service';
+import { UnidadeService } from '../../Unidades/services/unidade.service';
 
 @Injectable()
 export class ColaboradorService {
@@ -10,6 +12,8 @@ export class ColaboradorService {
     constructor(
         @InjectRepository(Colaborador)
         private colaboradorRepository: Repository<Colaborador>,
+        private cargoService: CargoService,
+        private unidadeService: UnidadeService
     ) { }
 
     // *** Buscar todos os colaboradores
@@ -17,6 +21,10 @@ export class ColaboradorService {
         return await this.colaboradorRepository.find({
             order: {
                 nome: "ASC"
+            },
+            relations: {
+                cargo: true,
+                unidade: true
             }
         });
     }
@@ -26,6 +34,10 @@ export class ColaboradorService {
         const colaborador = await this.colaboradorRepository.findOne({
             where: {
                 id: id // Usando 'id' conforme definido na sua Entity
+            },
+            relations: {
+                cargo: true,
+                unidade: true
             }
         });
 
@@ -41,6 +53,10 @@ export class ColaboradorService {
             where: {
                 nome: Like(`%${nome}%`)
             },
+            relations: {
+                cargo: true,
+                unidade: true
+            }
         });
 
         return colaboradores;
@@ -48,6 +64,16 @@ export class ColaboradorService {
 
     // *** Criar colaborador
     async create(colaborador: Colaborador): Promise<Colaborador> {
+        if (colaborador.cargo) {
+            await this.cargoService.findById(colaborador.cargo.id);
+
+            return await this.colaboradorRepository.save(colaborador);
+        }
+        if (colaborador.unidade) {
+            await this.unidadeService.findById(colaborador.unidade.id);
+
+            return await this.colaboradorRepository.save(colaborador);
+        }
         return await this.colaboradorRepository.save(colaborador);
     }
 
@@ -55,6 +81,17 @@ export class ColaboradorService {
     async update(colaborador: Colaborador): Promise<Colaborador> {
         // Verifica se o colaborador existe antes de atualizar
         await this.findById(colaborador.id);
+
+        if (colaborador.cargo) {
+            await this.cargoService.findById(colaborador.cargo.id);
+
+            return await this.colaboradorRepository.save(colaborador);
+        }
+        if (colaborador.unidade) {
+            await this.unidadeService.findById(colaborador.unidade.id);
+
+            return await this.colaboradorRepository.save(colaborador);
+        }
 
         return await this.colaboradorRepository.save(colaborador);
     }
@@ -100,9 +137,5 @@ export class ColaboradorService {
             salarioLiquido: resultadoGeral.toFixed(2)
         };
     }
-
-    //Criar relação com:
-    // tb_usuarios id_cliente e,
-    // tb_cargos_id_cargo
 
 }

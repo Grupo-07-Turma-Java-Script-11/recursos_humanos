@@ -16,7 +16,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('people-flow-rh', app, document);
+  SwaggerModule.setup('/swagger', app, document);
 
   // Ajustando o Fuso Horário do BD
   process.env.TZ = '-03:00';

@@ -68,8 +68,11 @@ export class UnidadeService {
     }
 
     async update(usuario: Unidades): Promise<Unidades> {
-        let usuarioUpdate: Unidades = await this.findById(usuario.id) // Função para localizar o usuario pelo ID
-        let usuarioBusca = await this.findByUsuario(usuario.usuario) // Função para localizar o usuario pelo email
+        // 1. Localiza o usuário existente no banco
+        let usuarioUpdate: Unidades = await this.findById(usuario.id);
+
+        // 2. Localiza se o e-mail novo já pertence a outra pessoa
+        let usuarioBusca = await this.findByUsuario(usuario.usuario);
 
         if (!usuarioUpdate)
             throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);
@@ -77,7 +80,16 @@ export class UnidadeService {
         if (usuarioBusca && usuarioBusca.id !== usuario.id)
             throw new HttpException('Usuário (e-mail) já Cadastrado, digite outro!', HttpStatus.BAD_REQUEST);
 
-        usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha)
+        // --- LÓGICA DA SENHA INTELIGENTE ---
+        
+        // Se a senha veio vazia do Front (ou não veio), mantém a senha que já estava no banco
+        if (!usuario.senha || usuario.senha.trim() === "") {
+            usuario.senha = usuarioUpdate.senha; 
+        } else {
+            // Se o usuário digitou uma senha nova, aí sim nós criptografamos
+            usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
+        }
+
         return await this.unidadeRepository.save(usuario);
     }
 

@@ -22,9 +22,10 @@ export class Unidades {
     usuario: string
 
     @ApiProperty()
-    @IsNotEmpty()
+    @IsOptional() // <-- MUDANÇA AQUI: Permite que o campo não venha na atualização
+    @IsNotEmpty({ groups: ['create'] }) // Opcional: exige apenas no cadastro se usar groups
     @Column({ length: 255, nullable: false })
-    senha: string
+    senha: string;
 
     @ApiProperty()
     @Column({ length: 5000 })

@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, isEmail, IsNotEmpty } from "class-validator";
+import { IsEmail, isEmail, IsNotEmpty, IsOptional } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Colaborador } from "../../colaborador/entities/colaborador.entity";
 

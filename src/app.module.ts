@@ -7,6 +7,8 @@ import { CargoModule } from './cargos/cargos.module';
 import { AuthModule } from './auth/auth.module';
 import { ProdService } from './data/services/prod.service';
 import { AppController } from './app.controller';
+import { DevService } from './data/services/dev.service';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { AppController } from './app.controller';
       useClass: ProdService,
       imports: [ConfigModule],
     }),
-    UnidadeModule, ColaboradorModule, CargoModule, AuthModule
+    UnidadeModule, ColaboradorModule, CargoModule, AuthModule, ChatModule
   ],
   controllers: [AppController],
   providers: [],

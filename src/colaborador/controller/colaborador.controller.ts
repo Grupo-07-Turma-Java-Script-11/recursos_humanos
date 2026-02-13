@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query, Res, UseGuards } from "@nestjs/common";
 import { ColaboradorService } from "../service/colaborador.service";
 import { Colaborador } from "../entities/colaborador.entity";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import * as e from 'express';
 
 @ApiTags('Colaboradores')
 @UseGuards(JwtAuthGuard)
@@ -71,4 +72,27 @@ export class ColaboradorController {
         // Executa a regra de cálculo automático de salário na Service
         return this.colaboradorService.calcularSalarioLiquido(id, dadosHolerite);
     }
+
+    @Get('/relatorio/excel')
+    @ApiOperation({ summary: 'Gerar relatório em Excel' })
+    async exportExcel(@Res() res: e.Response) { 
+        try {
+            // Chama a service para gerar o arquivo
+            const buffer = await this.colaboradorService.exportarExcel();
+
+            // Define os cabeçalhos para o navegador entender que é um download
+            res.set({
+                'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition': 'attachment; filename=colaboradores.xlsx',
+                'Content-Length': buffer.byteLength,
+            });
+
+            // Envia o arquivo finalizado
+            res.end(buffer);
+        } catch (error) {
+            console.error(error);
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Erro ao gerar relatório");
+        }
+    }
+
 }
